@@ -1,0 +1,11 @@
+ID,Name,Gender,Age,EmergencyContactNumber,CurrentGradeLevel,CoachID
+101,Alice,Female,10,123456789,1,1
+102,Bob,Male,10,987654321,2,2
+103,Charlie,Male,8,555555555,2,1
+104,Daisy,Female,7,777777777,4,2
+105,Eve,Female,6,999999999,3,1
+106,Frank,Male,7,111111111,1,2
+107,Gina,Female,6,222222222,1,1
+108,Harry,Male,7,333333333,1,2
+109,Ivy,Female,6,444444444,4,3
+110,Jack,Male,7,666666666,1,4
