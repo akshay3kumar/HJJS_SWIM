@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author akuma797
  */
-public class Lesson {
+public class Lesson implements Cloneable{
     private List<Learner> learners;
     private int rating;
     private int gradeLevel;
@@ -99,11 +99,31 @@ public class Lesson {
     return learners.size() < 4;
 }
 
-    public void addLearner(Learner learner) {
-    learners.add(learner);
+    public boolean add_learner(Learner learner) {
+    if (learners.size() < 4) {
+            learners.add(learner);
+            return true;
+        }
+        return false;
 }
 
+    public void remove_learner(Learner learner) {
+    this.getLearners().remove(learner);
+    }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+    @Override
+    public String toString() {
+        return "Lesson \n" +
+                "day='" + day + '\'' +"\n"+
+                ", week=" + week +"\n"+
+                ", time='" + time + '\'' +"\n"+
+                ", gradeLevel=" + gradeLevel +"\n"+
+                '}';
+    }
     
     
 }

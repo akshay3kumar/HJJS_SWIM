@@ -12,7 +12,7 @@ public class LearnerOperations {
     }
 
     public void createLearner(String name,String gender,String age,String emContact,int gLevel) {
-            int uniqueId= Integer.parseInt(generateUniqueId());
+            int uniqueId= generateUniqueId();
             Learner newLearner = new Learner(uniqueId,name,gender,age,emContact,gLevel);
             learnerMap.put(name,newLearner);
     }

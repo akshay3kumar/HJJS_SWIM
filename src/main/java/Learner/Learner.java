@@ -12,9 +12,9 @@ public class Learner {
     String emContactNumber;
     int currentGradeLevel;
     int coachId;
-    private List<Lesson> bookedLessons = new ArrayList<>();
-    private List<Lesson> attendedLessons= new ArrayList<>();
-    private List<Lesson> canceledLessons= new ArrayList<>();
+    private List<Lesson> booked = new ArrayList<>();
+    private List<Lesson> attended= new ArrayList<>();
+    private List<Lesson> canceled= new ArrayList<>();
 
     public int getLearnerId() {
         return learnerId;
@@ -93,32 +93,32 @@ public class Learner {
         this.coachId = coachId;
     }
 
-    public List<Lesson> getBookedLessons() {
-        return bookedLessons;
+    public List<Lesson> getBooked() {
+        return booked;
     }
 
-    public void setBookedLessons(List<Lesson> bookedLessons) {
-        this.bookedLessons = bookedLessons;
+    public void setBooked(List<Lesson> booked) {
+        this.booked = booked;
     }
 
-    public List<Lesson> getAttendedLessons() {
-        return attendedLessons;
+    public List<Lesson> getAttended() {
+        return attended;
     }
 
-    public void setAttendedLessons(List<Lesson> attendedLessons) {
-        this.attendedLessons = attendedLessons;
+    public void setAttended(List<Lesson> attended) {
+        this.attended = attended;
     }
 
-    public List<Lesson> getCanceledLessons() {
-        return canceledLessons;
+    public List<Lesson> getCanceled() {
+        return canceled;
     }
 
-    public void setCanceledLessons(List<Lesson> canceledLessons) {
-        this.canceledLessons = canceledLessons;
+    public void setCanceled(List<Lesson> canceled) {
+        this.canceled = canceled;
     }
 
     public boolean hasDuplicateBooking(int week, String day, String timeSlot, int grade) {
-    for (Lesson lesson : bookedLessons) {
+    for (Lesson lesson : booked) {
         if (lesson.getWeek() == week
                 && lesson.getDay().equals(day)
                 && lesson.getTime().equals(timeSlot)
@@ -130,9 +130,23 @@ public class Learner {
 }
 
     public void addBookedLesson(Lesson lesson) {
-    bookedLessons.add(lesson);
+    booked.add(lesson);
 }
 
+    public void change_booking(Lesson oldLesson, Lesson newLesson) {
+		booked.remove(oldLesson);
+		booked.add(newLesson);
+	}
 
+ public void cancel_booking(Lesson lesson) {
+		booked.remove(lesson);
+		booked.add(lesson);
+	}
+
+    public void attend_lesson(Lesson lesson) {
+		booked.remove(lesson);
+		attended.add(lesson);
+                this.currentGradeLevel++;
+	}
     
 }

@@ -1,12 +1,16 @@
 import Coach.Coach;
 import Learner.Learner;
+import UniqueIdGenerator.UniqueIdGenerator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import main.HjjsSwim;
 
 public class HJSSSoftware {
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -19,13 +23,18 @@ public class HJSSSoftware {
 
     public HJSSSoftware() {
         learnerMap=new HashMap<>();
-        loadLearners(".\\src\\main\\java\\Data\\learner.txt");
+        loadLearners();
         coachMap=new HashMap<>();
-        loadCoaches(".\\src\\main\\java\\Data\\coaches.txt");
+        loadCoaches();
     }
 
-    private void loadLearners(String fileName) {
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+    private void loadLearners() {
+        InputStream inputStream = HJSSSoftware.class.getClassLoader().getResourceAsStream("learner.txt");
+    if (inputStream == null) {
+        System.err.println("learner.txt not found in the classpath.");
+        return;
+    }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             // Skip the header line
             br.readLine();
 
@@ -47,8 +56,13 @@ public class HJSSSoftware {
         }
        
     }
-    private void loadCoaches(String fileName) {
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+    private void loadCoaches() {
+        InputStream inputStream = HJSSSoftware.class.getClassLoader().getResourceAsStream("coaches.txt");
+    if (inputStream == null) {
+        System.err.println("learner.txt not found in the classpath.");
+        return;
+    }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             // Skip the header line
             br.readLine();
 
@@ -102,16 +116,18 @@ public class HJSSSoftware {
 
                     break;
                 case 2:
-
+                    swim.modifyBookings();
                     break;
                 case 3:
-
+                    swim.attend_class();
                      break;
-                case 5:
-                    
-                    
-                    hjssSoftware.listAllLearners();
+                case 4:
+                    swim.learner_monthly_repport();
                     break;
+                case 5:
+                    swim.coach_monthly_report();
+                    break;
+                   
                 case 6:
                     System.out.println("Enter Full Name");
                     String name = scanner.nextLine();
@@ -123,7 +139,7 @@ public class HJSSSoftware {
                     String emContact = scanner.nextLine();
                     System.out.println("Enter Grade Level");
                     int gLevel = Integer.parseInt(scanner.nextLine());
-                    int  uniqueId = Integer.parseInt(emContact);
+                    int  uniqueId = UniqueIdGenerator.generateUniqueId();
                     Learner newLearner = new Learner(uniqueId,name,gender,age,emContact,gLevel);
                     //Learner learner = new Learner(name, gender, age, emergencyContact, currentGrade);
                     swim.addLearner(newLearner);

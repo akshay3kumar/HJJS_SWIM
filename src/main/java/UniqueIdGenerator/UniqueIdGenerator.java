@@ -5,7 +5,7 @@ import java.util.Random;
 public class UniqueIdGenerator {
     private static final int ID_LENGTH = 10;
 
-    public static String generateUniqueId() {
+    public static int generateUniqueId() {
         long timestamp = System.currentTimeMillis();
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
@@ -16,6 +16,6 @@ public class UniqueIdGenerator {
             sb.append(random.nextInt(10)); // Append random numbers
         }
 
-        return sb.toString();
+        return Integer.parseInt(sb.toString());
     }
 }
